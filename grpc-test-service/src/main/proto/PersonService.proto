@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package org.jb.grpc;
+
+message Person {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+message PersonDetails {
+  string phone = 1;
+  string address = 2;
+  string date_of_birth = 3;
+  string descr = 4;
+}
+
+service PersonService {
+  rpc getPersonDetails (Person) returns (PersonDetails);
+}
