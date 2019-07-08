@@ -1,2 +1,15 @@
-grpc-test-service/target/*.*
-grpc-test-client/target/*.*
+grpc-test-service/target/
+grpc-test-client/target/
+grpc-test-service/.metadata/
+grpc-test-client/.metadata/
+grpc-test-service/.metadata/
+grpc-test-client/.metadata/
+.metadata/
+grpc-test-service/.classpath/
+grpc-test-client/.classpath/
+grpc-test-service/.mvn/
+grpc-test-client/.mvn/
+.classpath/
+.project/
+.settings/
+*.zip
