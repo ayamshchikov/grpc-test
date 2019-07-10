@@ -1,0 +1,7 @@
+request:
+  count: 1000
+  size: 1000
+  
+grpc:
+  host: localhost
+  port: 6565

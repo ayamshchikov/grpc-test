@@ -5,6 +5,7 @@ import java.lang.invoke.MethodHandles;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -20,9 +21,19 @@ public class GrpcClient {
 
   private PersonServiceGrpc.PersonServiceBlockingStub personServiceBlockingStub;
 
+  //localhost
+  @Value("${grpc.host}")
+  private String grpcServer;
+
+  //6565
+  @Value("${grpc.port}")
+  private int grpcPort;
+  
   @PostConstruct
   private void init() {
-    ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 6565).usePlaintext().build();
+	LOGGER.info("--- Initialize gRPC channel to {} : {}", grpcServer, grpcPort);
+    //ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 6565).usePlaintext().build();
+    ManagedChannel managedChannel = ManagedChannelBuilder.forAddress(grpcServer, grpcPort).usePlaintext().build();
     personServiceBlockingStub = PersonServiceGrpc.newBlockingStub(managedChannel);
   }
 

@@ -3,6 +3,7 @@ package org.jb.grpc;
 //import static org.assertj.core.api.Assertions.assertThat;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jb.grpc.client.GrpcClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,29 +27,28 @@ public class SpringGrpcApplicationTests {
 
   @Test
   public void testSayHello() {
-    int length = 10000;
     //boolean useLetters = true;
     //boolean useNumbers = false;
-
     //String firstName = RandomStringUtils.random(length, useLetters, useNumbers);
-    String name = RandomStringUtils.randomAlphabetic(length);
 
-    Long id = Long.valueOf(RandomStringUtils.randomNumeric(1, 5));
-//    String lastName = RandomStringUtils.randomAlphanumeric(length);
-
+    int size = 10000;
     int msgCount = 10000;
     PersonDetails response;
 
-
-    LOGGER.info("===== Sending {} messages to gRPC =====", msgCount);
+    Long id;
+    String name;
+    
+    LOGGER.info("===== Sending {} messages to gRPC (size: {}) =====", msgCount, size);
     long startTime = System.currentTimeMillis();
 
     for(int i=0; i<msgCount; i++) {
+      id = Long.valueOf(RandomStringUtils.randomNumeric(1, 5));
+      name = RandomStringUtils.randomAlphabetic(size);
       response = grpcClient.getDetails(id, name);
     }
     LOGGER.info("===== Completed in {} sec. =====", ((System.currentTimeMillis()-startTime)/1000F));
 
-    //assertThat(helloWorldClient.sayHello("John", "Doe")).isEqualTo("Hello John Doe!");
+    //assertThat(StringUtils.startsWith(response.getDescr(), "Details for : "));
   }
   
 }
